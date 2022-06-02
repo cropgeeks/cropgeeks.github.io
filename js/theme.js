@@ -4,7 +4,6 @@
   const orgs = ['https://api.github.com/orgs/cropgeeks/repos?type=all&per_page=100&page=1', 'https://api.github.com/orgs/germinateplatform/repos?type=all&per_page=100&page=1']
   axios.all(orgs.map(o => axios.get(o)))
     .then(responses => {
-      console.log(responses)
       const cropgeeks = responses[0].data
       const germinate = responses[1].data
 
@@ -15,7 +14,7 @@
       const languages = new Set()
       repos.filter(r => r.language).forEach(r => languages.add(r.language))
 
-      $('#stargazer-count').html(stars)
+      $('#stargazer-count').html(stars + watchers)
       $('#repo-count').html(repoCount)
       $('#language-count').html(languages.size)
     })
